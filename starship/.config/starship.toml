@@ -1,19 +1,27 @@
 add_newline = false
 
 format = """
-$directory\
-$git_branch\
-$git_status\
-$nodejs\
-$python\
-$cmd_duration\
-$line_break\
-$character
+╭─ $directory $git_branch $git_status
+│  $nodejs $python $cmd_duration
+╰─ $character
 """
+
+[directory]
+style = "bold cyan"
+truncation_length = 3
+truncate_to_repo = false
+
+[git_branch]
+symbol = "🌱 "
+style = "bold purple"
 
 [git_status]
 style = "bold yellow"
 format = '([!$modified]($style) [?$untracked]($style) )'
+
+[nodejs]
+symbol = "⬢ "
+style = "bold green"
 
 [cmd_duration]
 min_time = 500
@@ -22,13 +30,3 @@ format = "⏱ [$duration]($style)"
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
-
-
-[directory]
-style = "bold blue"
-
-[git_branch]
-style = "bold magenta"
-
-[nodejs]
-style = "bold green"

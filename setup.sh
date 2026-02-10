@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
 set -e
 
-# Caminho base
+# -----------------------------
+# Caminho base absoluto
+# -----------------------------
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# -----------------------------
+# Core
+# -----------------------------
 source "$BASE_DIR/core/logger.sh"
 source "$BASE_DIR/core/detect-env.sh"
 
 log_info "Iniciando PocketDev Environment Setup"
 
 detect_environment
-
 log_info "Ambiente detectado: $POCKETDEV_ENV"
 
+# -----------------------------
+# Instalações
+# -----------------------------
 log_info "Instalando base do sistema"
 source "$BASE_DIR/install/base.sh"
 
@@ -25,20 +32,20 @@ source "$BASE_DIR/install/node.sh"
 log_info "Configurando Zsh"
 source "$BASE_DIR/install/zsh.sh"
 
-log_success "Ambiente PocketDev pronto 🚀"
-log_info "Reinicie o terminal para aplicar todas as configurações"
-
-#!/usr/bin/env bash
-set -e
-
-echo "🧠 PocketDev — Setup completo"
-
-./install.sh
-
-echo "🔗 Aplicando configurações com Stow"
+# -----------------------------
+# Dotfiles (Stow)
+# -----------------------------
+log_info "Aplicando dotfiles com GNU Stow"
+cd "$BASE_DIR"
 stow zsh starship tmux git nvim
 
-echo "🐚 Definindo Zsh como shell padrão"
-chsh -s "$(which zsh)" || true
+# -----------------------------
+# Shell padrão
+# -----------------------------
+if command -v zsh >/dev/null; then
+  log_info "Definindo Zsh como shell padrão"
+  chsh -s "$(which zsh)" || true
+fi
 
-echo "✅ PocketDev pronto. Reinicie o terminal."
+log_success "PocketDev Environment pronto 🚀"
+log_info "Reinicie o terminal para aplicar todas as configurações"
