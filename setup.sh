@@ -27,3 +27,18 @@ source "$BASE_DIR/install/zsh.sh"
 
 log_success "Ambiente PocketDev pronto 🚀"
 log_info "Reinicie o terminal para aplicar todas as configurações"
+
+#!/usr/bin/env bash
+set -e
+
+echo "🧠 PocketDev — Setup completo"
+
+./install.sh
+
+echo "🔗 Aplicando configurações com Stow"
+stow zsh starship tmux git nvim
+
+echo "🐚 Definindo Zsh como shell padrão"
+chsh -s "$(which zsh)" || true
+
+echo "✅ PocketDev pronto. Reinicie o terminal."
