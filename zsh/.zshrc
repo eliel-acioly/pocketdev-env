@@ -15,6 +15,9 @@ source "$HOME/pocketdev-env/zsh/aliases.zsh"
 # Zoxide
 eval "$(zoxide init zsh)"
 
+autoload -Uz compinit
+compinit
+
 # History
 HISTSIZE=10000
 SAVEHIST=10000

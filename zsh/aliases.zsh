@@ -53,3 +53,6 @@ alias c='clear'
 alias ex='exit'
 alias zshrc='nano ~/.zshrc'
 alias reload='source ~/.zshrc'
+
+# -- Ubuntu (proot-distro) --
+alias ubuntu='proot-distro login ubuntu'
